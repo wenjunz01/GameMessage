@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.neu.store.mapper.UserMapper" >
+
+    <resultMap id="UserEntityMap" type="cn.edu.neu.store.model.User">
+        <result column="u_id" property="u_id"></result>
+        <result column="username" property="username"></result>
+        <result column="aveter" property="aveter"></result>
+        <result column="password" property="password"></result>
+        <result column="age" property="age"></result>
+        <result column="gender" property="gender"></result>
+        <result column="email" property="email"></result>
+        <result column="phone" property="phone"></result>
+        <result column="u_rank" property="u_rank"></result>
+    </resultMap>
+
+    <select id="existsUser" parameterType="cn.edu.neu.store.model.User" resultType="cn.edu.neu.store.model.User">
+        select u_id,username from user where username=#{username} and password=#{password} and u_rank !=0
+    </select>
+
+    <insert id="regUser" parameterType="cn.edu.neu.store.model.User">
+        insert into user(username,password,aveter,age,gender,email,phone,u_rank)
+        values(#{username},#{password},#{aveter},#{age},#{gender},#{email},#{phone},0)
+    </insert>
+
+    <insert id="addUser" parameterType="cn.edu.neu.store.model.User">
+        insert into user(username,aveter,age,password,gender,email,phone,u_rank)
+        values(#{username},#{filePath},#{age},#{password},#{gender},#{email},#{phone},0)
+    </insert>
+
+    <select id="getUserList" parameterType="cn.edu.neu.store.model.User" resultType="cn.edu.neu.store.model.User">
+        select * from user
+        <where>
+        <if test="u_rank != 0 and username != null and username != ''">
+                and username like concat('%',#{username},'%')
+        </if>
+        <if test="u_rank != 1 and username != null and username != ''">
+                and username like #{username}
+        </if>
+        </where>
+    </select>
+
+    <select id="getUser" resultType="cn.edu.neu.store.model.User">
+        select * from user where u_id=#{u_id}
+    </select>
+
+    <update id="updateUser" parameterType="cn.edu.neu.store.model.User">
+        update user set
+        <if test="username !=null and username != ''">username = #{username}</if> ,
+        aveter = #{filePath},password = #{password},age= #{age}, gender = #{gender}, phone = #{phone},email = #{email}
+        where u_id = #{u_id}
+    </update>
+
+    <delete id="deleteUser" parameterType="cn.edu.neu.store.model.User">
+        delete from user where u_id=#{u_id}
+    </delete>
+
+    <select id="getUserById"
+            parameterType="java.lang.Integer"
+            resultMap="UserEntityMap">
+        select *
+        from user
+        where u_id = #{u_id}
+
+    </select>
+
+    <select id="countByGender"  parameterType="int" resultType="int">
+        SELECT COUNT(gender) FROM user WHERE gender=#{gender}
+    </select>
+
+</mapper>

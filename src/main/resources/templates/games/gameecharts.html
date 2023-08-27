@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>GameStore</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div th:replace="manager/header::header-nav"></div>	<hr>
+<div id="main1" style="width: 600px;height:400px;float: left"></div>
+<!--<div id="main2" style="width: 600px;height:400px;float:left;"></div>-->
+<div id="main3" style="width: 600px;height:400px; float: left"></div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.1/echarts.min.js" ></script>
+<script type="text/javascript">
+    $(function () {
+        //基于准备好的dom，初始化echarts实例
+        $.ajax({
+            type: "GET",
+            url: "/user/ratio",
+            async: false,
+            success: function (r) {
+
+            chart = echarts.init(document.getElementById('main1'));
+
+                // 指定图表的配置项和数据
+                    chart.setOption ({
+                        title: {
+                            text: '用户男女数量'
+                        },
+                    xAxis: {
+                        type: 'category',
+                        data: ["男性","女性"]
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            data: [
+                                {value: r.male,name: '男性'},
+                                {value: r.female,name: '女性'}
+                            ],
+                            type: 'bar',
+                            showBackground: true,
+                            backgroundStyle: {
+                                color: 'rgba(220, 220, 220, 0.8)'
+                            }
+                        }
+                    ]
+                });
+            }
+
+        })
+    })
+</script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    $(function () {
+        //基于准备好的dom，初始化echarts实例
+        $.ajax({
+            type: "GET",
+            url: "/user/ratio",
+            async: false,
+            success: function (r) {
+                console.log(r)
+                chart = echarts.init(document.getElementById('main2'));
+                chart.setOption({
+                    title: {
+                        text: '用户性别比例'
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b}: {c} ({d}%)'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        right: 'center',
+                        data: ['男性', '女性']
+                    },
+                    series: [
+                        {
+                            name: '性别',
+                            type: 'pie',
+                            radius: ['50%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true,
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            data: [
+                                {value: r.male, name: '男性'},
+                                {value: r.female, name: '女性'}
+                            ]
+                        }
+                    ]
+                });
+            }
+        })
+    })
+</script>
+<script type="text/javascript">
+    $(function () {
+        //基于准备好的dom，初始化echarts实例
+        $.ajax({
+            type: "GET",
+            url: "/games/platform",
+            async: false,
+            success: function (r) {
+
+                chart = echarts.init(document.getElementById('main3'));
+                //指定图表的配置项和数据
+                chart.setOption({
+                        title: {
+                            text: '游戏平台分布'
+                        },
+                    xAxis: {
+                        data: ["Nintendo", "Steam", "PS5", "Xbox", "Epic", "Switch"]
+                    },
+                    yAxis: {
+                    },
+                    series: [
+                        {
+                            type: 'scatter',
+                            data: [
+                                {value: r.nintendo, name: 'Nintendo'},
+                                {value: r.steam, name: 'Steam'},
+                                {value: r.pS5, name: 'PS5'},
+                                {value: r.xbox, name: 'Xbox'},
+                                {value: r.epic, name: 'Epic'},
+                                {value: r.switch, name: 'Switch'},
+                            ],
+                            showBackground: true,
+                            backgroundStyle: {
+                                color: 'rgba(220, 220, 220, 0.8)'
+                            }
+                        }
+                    ]
+                });
+            }
+        })
+    })
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/heart.js}"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>GameStore</title>
+        <!-- Bootstrap core CSS -->
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/signin.css}" rel="stylesheet">
+    </head>
+</head>
+<body>
+<div class="loginDiv">
+    <p style="margin-left: 70px">[[#{login.tip}]]</p>
+    <!--表单开始-->
+    <p style="color: red;margin-left: 60px" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}" ></p>
+    <form id="form-login" th:action="@{/user/login}" th:method="post" class="form-horizontal" role="form">
+        <!--用户名-->
+        <div class="form-group">
+            <label for="username" class="control-label">[[#{login.username}]]：</label>
+                <input name="username" type="text" class="form-control" id="username"  th:placeholder="#{login.username}">
+        </div>
+        <!--密码-->
+        <div class="form-group">
+            <label for="password" class=" control-label"> [[#{login.password}]]：</label>
+                <input name="password" type="password" class="form-control" id="password"  th:placeholder="#{login.password}">
+        </div>
+        <!--提交按钮-->
+        <div class="form-group">
+            <label class="control-label"></label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="login()">[[#{login.btn}]]</button>
+
+                <span class="pull-right"><small>还没有账号？</small><a th:href="@{/user/getReg}">[[#{login.reg}]]</a></span>
+        </div>
+        <a class="btn" th:href="@{/login.html(l='zh_CN')}">中文</a>
+        <a class="btn" th:href="@{/login.html(l='en_US')}">English</a>
+    </form>
+</div>
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/heart.js}"></script>
+
+</body>
+</html>

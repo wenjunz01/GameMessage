@@ -1,0 +1,23 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /
+spring:
+  profiles:
+    active: dev
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java
+
+  mvc:
+    dispatch-options-request: true
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    cache: false  #使用Thymeleaf模板引擎，关闭缓存
+    servlet:
+      content-type: text/html
+  resources:
+    static-locations:
+      - classpath:/static/

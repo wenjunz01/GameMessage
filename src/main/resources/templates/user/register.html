@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Signin Template for Bootstrap</title>
+        <!-- Bootstrap core CSS -->
+        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/signin.css}" rel="stylesheet">
+    </head>
+</head>
+<body>
+<div class="loginDiv">
+    <p style="margin-left: 70px">[[#{login.reg}]]</p>
+    <!--表单开始-->
+    <form id="form-register" th:action="@{/user/ToReg}"  class="form-horizontal" role="form" th:method="post">
+        <!--用户名-->
+        <div class="form-group">
+            <label for="user_name" class="control-label">[[#{login.username}]]：</label>
+            <input name="username" type="text" class="form-control" id="user_name"  th:placeholder="#{login.username}" required>
+            <input type="hidden" name="aveter" id="aveter" value="/images/defual.png">
+        </div>
+        <input name="aveter" value="/images/defual.png"   style="display: none">
+        <!--密码-->
+        <div class="form-group">
+            <label for="user_pass" class=" control-label"> [[#{login.password}]]：</label>
+            <input name="password" type="text" class="form-control" id="user_pass" th:placeholder="#{login.password}" required>
+        </div>
+        <div class="form-group">
+            <label for="age" class=" control-label"> [[#{login.age}]]：</label>
+            <input name="age" type="text" class="form-control" id="age" th:placeholder="#{login.age}" required>
+        </div>
+        <div class="form-group">
+            <label for="user_sex" class=" control-label"> [[#{login.sex}]]：</label>
+            <select name="gender" id="user_sex">
+                <option value="0">[[#{login.man}]]</option>
+                <option value="1">[[#{login.woman}]]</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="user_email" class=" control-label"> [[#{login.email}]]：</label>
+            <input name="email" type="text" class="form-control" id="user_email"  th:placeholder="#{login.email}" required>
+        </div>
+        <div class="form-group">
+            <label for="user_phone" class=" control-label"> [[#{login.phone}]]：</label>
+            <input name="phone" type="text" class="form-control" id="user_phone"  th:placeholder="#{login.phone}" required>
+        </div>
+        <!--提交按钮-->
+        <div class="form-group">
+            <label class="control-label"></label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">[[#{login.reg}]]</button>
+            <span class="pull-right"><small>已有账号！</small><a th:href="@{/user/login}">[[#{login.tip}]]</a></span>
+        </div>
+        <a class="btn" th:href="@{/user/register.html(l='zh_CN')}">中文</a>
+        <a class="btn" th:href="@{/user/register.html(l='en_US')}">English</a>
+    </form>
+</div>
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/heart.js}"></script>
+
+</body>
+</html>

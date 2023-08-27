@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.neu.store.mapper.GameMapper" >
+
+    <resultMap id="GamesEntityMap" type="cn.edu.neu.store.model.Games">
+        <result column="g_id" property="g_id"></result>
+        <result column="g_name" property="g_name"></result>
+        <result column="g_price" property="g_price"></result>
+        <result column="g_storage" property="g_storage"></result>
+        <result column="g_platform" property="g_platform"></result>
+        <result column="g_details" property="g_details"></result>
+        <result column="g_type" property="g_type"></result>
+        <result column="g_pic" property="g_pic"></result>
+    </resultMap>
+
+    <select id="getGameList" parameterType="cn.edu.neu.store.model.Games" resultType="cn.edu.neu.store.model.Games">
+        select * from games
+        <where>
+            <if test="g_name != null and g_name != ''">
+                and g_name like concat('%',#{g_name},'%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="addGame" parameterType="cn.edu.neu.store.model.Games">
+        insert into games(g_name,g_price,g_storage,g_platform,g_details,g_type,g_pic)
+        values(#{g_name},#{g_price},#{g_storage},#{g_platform},#{g_details},#{g_type},#{filePath})
+    </insert>
+
+    <select id="getGame" resultType="cn.edu.neu.store.model.Games">
+        select * from games where g_id=#{g_id}
+    </select>
+
+    <update id="updateGame" parameterType="cn.edu.neu.store.model.Games">-- filePath
+        update games set g_name = #{g_name},
+                         g_price = #{g_price},
+                         g_storage = #{g_storage},
+                         g_platform = #{g_platform},
+                         g_details = #{g_details},
+                         g_type = #{g_type},
+                         g_pic=#{filePath}
+                     where g_id = #{g_id}
+    </update>
+
+    <delete id="deleteGame" parameterType="cn.edu.neu.store.model.Games">
+        delete from games where g_id=#{g_id}
+    </delete>
+
+    <select id="getEcharts" parameterType="cn.edu.neu.store.model.Games" resultMap="GamesEntityMap">
+            SELECT * FROM games;
+    </select>
+
+    <select id="countByPla"  parameterType="string" resultType="string">
+        SELECT COUNT(g_platform) FROM games WHERE g_platform=#{g_platform}
+    </select>
+</mapper>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>GameStore</title>
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <script th:src="@{/js/heart.js}"></script>
+</head>
+<body>
+<div th:replace="manager/header::header-nav"></div>	<hr>
+<div class="container-fluid">
+<!--  <form th:action="@{/user/getSearch}" th:method="post">-->
+<!--    <input type="text" id="username" name="username">-->
+<!--    <button type="submit" class="btn btn-primary">搜索</button>-->
+<!--  </form>-->
+    <main role="main">
+      <a class="btn btn-success" style="float: right" th:href="@{/user/getAdd}">添加用户</a>
+      <div class="table-responsive">
+        <table  class="table">
+          <thead thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rank</th>
+            <th scope="col">0p</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="user:${userList}">
+            <td th:text="${user.getU_id()}"></td>
+            <td th:text="${user.getUsername()}"></td>
+            <td th:text="${user.getAge()}"></td>
+            <td th:text="${user.getGender()==0?'男':'女'}"></td>
+            <td th:text="${user.getPhone()}"></td>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getU_rank()}"></td>
+            <td >
+              <a th:href="@{'getUserById/'+${user.getU_id()}}" class="btn btn-sm btn-primary">查看</a>&nbsp;&nbsp;
+              <a class="btn btn-sm btn-primary" th:href="@{/user/getUser(userid=${user.getU_id()})}">修改</a>&nbsp;&nbsp;
+              <a class="btn btn-sm btn-danger alert-link" th:href="@{/user/deleteUser(u_id=${user.getU_id()})}" onclick="return confirm('确定要删除吗？')" id="liveToastBtn">删除</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 5; right: 0; bottom: 0;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+          <div class="toast-header">
+            <img src="..." class="rounded mr-2" alt="...">
+            <strong class="mr-auto">Bootstrap</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+        </div>
+      </div>
+    </main>
+</div>
+
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/heart.js}"></script>
+</body>
+
+</html>

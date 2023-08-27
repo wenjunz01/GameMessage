@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>GameStore</title>
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <script th:src="@{/js/heart.js}"></script>
+  <style>
+    .body{
+      background-color: #f2f2f2;
+      color: #444;
+      font: 12px/1.5 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      background: url("./static/images/10.jpg") repeat 0 0;
+    }
+    div.da-wrapper {
+      width: 100%;
+      height: auto;
+      min-height: 100%;
+      position: relative;
+      min-width: 320px
+    }
+
+    div.da-wrapper .da-container {
+      width: 96%;
+      margin: auto
+    }
+
+    div.da-content {
+      clear: both;
+      padding-bottom: 58px
+    }
+
+    @media only screen and (max-width:480px) {
+      div.da-content {
+        margin-top: auto
+      }
+    }
+
+    div.da-error-wrapper {
+      width: 320px;
+      padding: 30px 0;
+      margin: auto;
+      position: relative
+    }
+
+    div.da-error-wrapper .da-error-heading {
+      color: #e15656;
+      text-align: center;
+      font-size: 24px;
+      font-family: Georgia, "Times New Roman", Times, serif
+    }
+
+    @-webkit-keyframes error-swing {
+      0% {
+        -webkit-transform: rotate(1deg)
+      }
+
+      100% {
+        -webkit-transform: rotate(-2deg)
+      }
+    }
+
+    @-moz-keyframes error-swing {
+      0% {
+        -moz-transform: rotate(1deg)
+      }
+
+      100% {
+        -moz-transform: rotate(-2deg)
+      }
+    }
+
+    @keyframes error-swing {
+      0% {
+        transform: rotate(1deg)
+      }
+
+      100% {
+        transform: rotate(-2deg)
+      }
+    }
+
+    div.da-error-wrapper .da-error-code {
+      width: 285px;
+      height: 170px;
+      padding: 127px 16px 0 16px;
+      position: relative;
+      margin: auto;
+      margin-bottom: 20px;
+      z-index: 5;
+      line-height: 1;
+      font-size: 32px;
+      text-align: center;
+      background: url("https://img-blog.csdnimg.cn/20191013143611666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpYW5naGVjYWk1MjE3MTMxNA==,size_16,color_FFFFFF,t_70") no-repeat center center;
+      -webkit-transform-origin: center top;
+      -moz-transform-origin: center top;
+      transform-origin: center top;
+      -webkit-animation: error-swing infinite 2s ease-in-out alternate;
+      -moz-animation: error-swing infinite 2s ease-in-out alternate;
+      animation: error-swing infinite 2s ease-in-out alternate
+    }
+
+    div.da-error-wrapper .da-error-code .tip {
+      padding-top: 2px;
+      font-size: 30px;
+      color: #7d2f61;
+    }
+
+    div.da-error-wrapper .da-error-code .tip2 {
+      padding-top: 15px;
+      font-size: 22px;
+    }
+
+    div.da-error-wrapper .da-error-code .tip3 {
+      padding-top: 30px;
+      font-size: 16px;
+      color: #7d2f61;
+    }
+
+    div.da-error-wrapper .da-error-pin {
+      width: 38px;
+      height: 38px;
+      display: block;
+      margin: auto;
+      margin-bottom: -27px;
+      z-index: 10;
+      position: relative;
+      background: url("./static/images/11.jpg") no-repeat center center
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+  </style>
+</head>
+<body>
+<!--导航-->
+<div th:replace="manager/header::header-nav"></div>	<hr>
+<div class="body">
+  <div class="da-wrapper">
+    <div class="da-content">
+      <div class="da-container clearfix">
+        <div class="da-error-wrapper">
+          <div class="da-error-pin"></div>
+          <div class="da-error-code">
+            <p class="tip">游戏商店后台管理</p>
+            <p class="tip2"><i class="el-icon-eleme"/>欢迎使用</p>
+            <p class="tip3">抵制不良游戏,拒绝盗版游戏。<br>注意自我保护,谨防受骗上当。<br>适度游戏益脑,沉迷游戏伤身。<br>合理安排时间,享受健康生活。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/heart.js}"></script>
+</body>
+</html>

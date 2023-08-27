@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>GameStore</title>
+  <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-image: url(./static/images/bg.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    label{
+      font-weight: bolder;
+    }
+    button{
+      width: 100px;
+      height:30px;
+      font-size:17px;
+      color:#fff;
+      border: none;
+    }
+    a:visited {
+      color:#0000FF;
+      text-decoration:none;
+    }
+    a:active {
+      color:black;
+      text-decoration:none;
+    }
+
+    a{
+      text-decoration: none;
+    }
+    label{
+      display: inline-block;
+      width:100px;
+      height: 10px;
+      line-height: 40px;
+      text-align: justify;
+      text-align-last: justify;
+      float: left;
+    }
+    textarea{
+      margin-left: 100px;
+      margin-top: 10px;
+    }
+    button{
+      margin-top: 20px;
+      height: 35px;
+      width: 130px;
+    }
+    form{
+      line-height: 30px;
+    }
+    input[type='text']{
+      width:150px;
+      margin-bottom:10px;
+      font-family: Verdana, Arial;
+    }
+    input[type='number']{
+      width:150px;
+      margin-left: 16px;
+      margin-bottom:10px;
+      font-family: Verdana, Arial;
+    }
+    input[type='checkbox']{
+      margin-left: 100px;
+    }
+    #navbar-example ul li a{
+      text-decoration: none;
+    }
+    ul li{
+      list-style-type:none;
+    }
+  </style>
+
+</head>
+<body data-spy="scroll" data-target="#navbar-example">
+<div th:replace="manager/header::header-nav"></div>	<hr>
+  <h2 style="text-align: center;">A New Game</h2>
+  <hr>
+  <form th:action="@{/games/addGame}" th:method="post" enctype="multipart/form-data">
+    <div class="container">
+      <div class="row">
+        <div class="col-5">
+    <label>游戏名称：</label>
+    <input type="text" id="g_name" name="g_name" class="form-control" required="required"><br>
+    <label>游戏价格：</label>
+    <input type="number" name="g_price" id="g_price" class="form-control" required="required"><br>
+    <label>游戏大小：</label>
+    <input type="number" name="g_storage" class="form-control" required="required"><br>
+    <label>游戏平台：</label>
+    <select name="g_platform" id="" required>
+      <option value="">--请选择游戏平台--</option>
+      <option value="Nintendo">Nintendo</option>
+      <option value="Switch">Switch</option>
+      <option value="PS5">PS5</option>
+      <option value="Xbox">Xbox</option>
+      <option value="Steam">Steam</option>
+      <option value="Epic">Epic</option>
+    </select><br>
+
+    <label>游戏类型：</label><br>
+    <input type="checkbox" name="g_type" value="多人游戏">多人游戏<br>
+    <input type="checkbox" name="g_type" value="家庭游戏">家庭游戏<br>
+    <input type="checkbox" name="g_type" value="体育游戏">体育游戏<br>
+    <input type="checkbox" name="g_type" value="单机游戏">单机游戏<br>
+    <input type="checkbox" name="g_type" value="动作游戏">动作游戏<br>
+    <input type="checkbox" name="g_type" value="暴力游戏">暴力游戏<br>
+        </div>
+        <div class="col-5">
+        <label>游戏描述：</label><br>
+        <textarea name="g_details" class="form-control" cols="5" rows="2" required></textarea><br>
+    <img id="imgshow"  style="width: 130px;height: 80px" onclick="openfile()" alt="点击选择图片"/>
+    <label>游戏图片： </label>&nbsp;<input type="file" id="file" name="file" required style="display: none"><br>
+        </div>
+
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <button type="sumbit" class="btn btn-primary">添加</button>
+        <button type="reset" class="btn btn-secondary">重置</button></div>
+      <div class="col-4"></div>
+    </div>
+
+  </form>
+
+<script th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/heart.js}"></script>
+<script>
+  function openfile(){
+    document.getElementById("file").click();
+  }
+  //在input file内容改变的时候触发事件
+  $('#file').change(function(){
+    //获取input file的files文件数组;
+    //$('#filed')获取的是jQuery对象，.get(0)转为原生对象;
+    //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+    var file = $('#file').get(0).files[0];
+    //创建用来读取此文件的对象
+    var reader = new FileReader();
+    //使用该对象读取file文件
+    reader.readAsDataURL(file);
+    //读取文件成功后执行的方法函数
+    reader.onload=function(e){
+      //读取成功后返回的一个参数e，整个的一个进度事件
+      console.log(e);
+      //选择所要显示图片的img，要赋值给img的src就是e中target下result里面
+      //的base64编码格式的地址
+      $('#imgshow').get(0).src = e.target.result;
+    }
+  })
+</script>
+
+</body>
+</html>

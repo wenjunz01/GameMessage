@@ -1,0 +1,102 @@
+body {
+	/*background: #eee;*/
+	background-size: cover;  //只支持IE9+
+-webkit-background-size: cover; //webkit核心
+-moz-background-size: cover; //FF核心
+-o-background-size: cover; //应该是Opera核心吧，反正不是IE的，就先不管它了
+}
+
+@keyframes mysnow {
+	0% {
+		bottom: 100%;
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		transform: rotate(360deg);
+	}
+	100% {
+		transform: rotate(0deg);
+		opacity: 0;
+		bottom: 0;
+	}
+}
+
+@-webkit-keyframes mysnow {
+	0% {
+		bottom: 100%;
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		-webkit-transform: rotate(360deg);
+	}
+	100% {
+		-webkit-transform: rotate(0deg);
+		opacity: 0;
+		bottom: 0;
+	}
+}
+
+@-moz-keyframes mysnow {
+	0% {
+		bottom: 100%;
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		-moz-transform: rotate(360deg);
+	}
+	100% {
+		-moz-transform: rotate(0deg);
+		opacity: 0;
+		bottom: 0;
+	}
+}
+
+@-ms-keyframes mysnow {
+	0% {
+		bottom: 100%;
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		-ms-transform: rotate(360deg);
+	}
+	100% {
+		-ms-transform: rotate(0deg);
+		opacity: 0;
+		bottom: 0;
+	}
+}
+
+@-o-keyframes mysnow {
+	0% {
+		bottom: 100%;
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+		-o-transform: rotate(360deg);
+	}
+	100% {
+		-o-transform: rotate(0deg);
+		opacity: 0;
+		bottom: 0;
+	}
+}
+
+.roll {
+	position: absolute;
+	opacity: 0;
+	animation: mysnow 10s;
+	-webkit-animation: mysnow 10s;
+	-moz-animation: mysnow 10s;
+	-ms-animation: mysnow 10s;
+	-o-animation: mysnow 10s;
+	height: 100px;
+}
+
+.div {
+	position: fixed;
+}
